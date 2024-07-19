@@ -1,5 +1,7 @@
 # SnakeandLadders
 
+## Note: This repository is archived and is no longer maintained.
+
 Snake and Ladders is a classic board game played between two or more players on a game board with numbered squares. The objective is to navigate from the start to the finish according to dice rolls, with the help or hindrance of snakes and ladders placed on the board.
 
 This bot is live at [@snakeandladdersbot](https://t.me/snakeandladderbot).
