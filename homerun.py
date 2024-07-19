@@ -5,21 +5,22 @@ import os
 import pandas as pd
 import json
 import shutil
-
+from dotenv import load_dotenv
 
 #created import
 from imagecreator import createimage
 
+load_dotenv()
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
-TOKEN = ''
+TOKEN = os.getenv('BOT_TOKEN')
 
 
-full_path =  os.path.realpath(__file__)                   
+full_path =  os.path.realpath(__file__)
 currentpath, filename = os.path.split(full_path)
 
 
@@ -28,7 +29,7 @@ currentpath, filename = os.path.split(full_path)
 def start(update, context):
     reply = """Want to play Snake And Ladders with friends, thats why I am here. \n
 How to Play:
-    
+
 1. Add @snakeandladdersbot to the group you want to Play.
 2. Start a game with /newgame command.
 3. Choose your coin by calling @snakeandladdersbot.
@@ -109,7 +110,7 @@ def joingame(update,context):
         if getplaystate(str(chatid)+"/playstate.json") == None:
             pass
         elif 654646546545 in getplaystate(str(chatid)+"/playstate.json")[1]:
-            pass        
+            pass
         else:
             data1 = getplaystate(str(chatid)+"/playstate.json")[0]
             data1.append([userid,firstname,"lobby",None])
@@ -220,7 +221,7 @@ def startgame(update,context):
                 keyboard = [
                 [
                 InlineKeyboardButton("Select Your Coin", url="https://t.me/addstickers/snakeandladdersicons"),
-                ]   
+                ]
                 ]
                 reply_markup = InlineKeyboardMarkup(keyboard)
                 context.bot.send_message(chat_id=update.effective_chat.id,text='{name} has not chosen colour. {name}, please choose color'.format(name=dtr[2][ii]),reply_markup=reply_markup)
@@ -378,7 +379,7 @@ def printupdate(update,context):
                         else:
                             if diceval == 6 or diceval == 1:
                                 valll = int(currentplayer(chatid,"1","read"))
-                            else:    
+                            else:
                                 valll = int(currentplayer(chatid,"1","read"))+1
                         currentplayer(chatid,str(valll),"write")
                     else:
@@ -427,19 +428,19 @@ def printupdate(update,context):
                     i+=1
             '''else:
                 with open(os.path.join(currentpath,"playing/"+jsonforchat1)) as f:
-                    data = json.load(f)     
+                    data = json.load(f)
                 if data["gamestate"] == "true":
                     context.bot.send_message(chat_id=update.effective_chat.id,text="You are not currently Playing")
         '''
         except Exception as e:
             print(e)
-    
+
 def main():
     """Start the bot."""
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    updater = Updater(TOKEN)
+    updater = Updater('1672404737:AAHEksOQMG9BqVzpJNm4dBsDg4RO7axY6IY')
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
